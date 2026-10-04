@@ -12,12 +12,13 @@ Complete, production-grade product specifications and technical documentation:
 
 | Document | Description |
 | :--- | :--- |
-| 📄 **[Product Requirements Document](PRODUCT_REQUIREMENTS_DOCUMENT.md)** | Product vision, target personas, problem statement, functional & non-functional requirements. |
-| ⚙️ **[Technical Requirements Document](TECHNICAL_REQUIREMENTS_DOCUMENT.md)** | Architecture, tech stack (React 19, Vite, Tailwind CSS), AI integration pipeline & performance metrics. |
-| 🗺️ **[App Flow Document](APP_FLOW_DOCUMENT.md)** | Route map, user journeys (Tenant, Roommate, Host, AI chat) and state machine diagrams. |
-| 🎨 **[UI/UX Design Brief](UI_UX_DESIGN_BRIEF.md)** | Design tokens, HSL color palette, typography guidelines, micro-interactions, accessibility specs. |
-| 🗄️ **[Backend Schema Document](BACKEND_SCHEMA_DOCUMENT.md)** | Database schemas (User, Property, Roommate, Verification), REST API contracts and data models. |
-| 🚀 **[Implementation Plan](IMPLEMENTATION_PLAN.md)** | Phased engineering roadmap, delivery milestones, automated testing checklist & deployment plan. |
+| 📚 **[Documentation Portal Hub](docs/README.md)** | Master index and architectural overview of all project documentation. |
+| 📄 **[Product Requirements Document](docs/PRODUCT_REQUIREMENTS_DOCUMENT.md)** | Product vision, target personas, problem statement, functional & non-functional requirements. |
+| ⚙️ **[Technical Requirements Document](docs/TECHNICAL_REQUIREMENTS_DOCUMENT.md)** | Architecture, tech stack (React 19, Vite, Tailwind CSS), AI integration pipeline & performance metrics. |
+| 🗺️ **[App Flow Document](docs/APP_FLOW_DOCUMENT.md)** | Route map, user journeys (Tenant, Roommate, Host, AI chat) and state machine diagrams. |
+| 🎨 **[UI/UX Design Brief](docs/UI_UX_DESIGN_BRIEF.md)** | Design tokens, HSL color palette, typography guidelines, micro-interactions, accessibility specs. |
+| 🗄️ **[Backend Schema Document](docs/BACKEND_SCHEMA_DOCUMENT.md)** | Database schemas (User, Property, Roommate, Verification), REST API contracts and data models. |
+| 🚀 **[Implementation Plan](docs/IMPLEMENTATION_PLAN.md)** | Phased engineering roadmap, delivery milestones, automated testing checklist & deployment plan. |
 | 📊 **[Full Engineering Report](docs/IMPLEMENTATION_REPORT.md)** | Complete implementation audit, benchmarks, component breakdown, and migration details. |
 
 ---
