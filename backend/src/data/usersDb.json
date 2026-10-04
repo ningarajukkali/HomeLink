@@ -1,0 +1,108 @@
+[
+  {
+    "id": "usr-current",
+    "name": "Aman Verma",
+    "email": "aman.v@gmail.com",
+    "phone": "+91 9826100001",
+    "passwordHash": "fb0362f6b5a534d037fa6a09048da313:8b7798c87ab3d41c01e6e6e303b51f3284703fcd2457bb3b07414d5a1fb716a6078d05a0174f82a00f1ffb035e9494f5066992dd4fb68cfd3430138e15c5622b",
+    "role": "Renter & Seeker",
+    "city": "Rewa, MP",
+    "isVerified": true,
+    "govtIdApproved": true,
+    "collegeIdApproved": true,
+    "trustLevel": "Tier 3 Authenticated",
+    "memberSince": "Aug 2023",
+    "ownedPropertyIds": [
+      "prop-1",
+      "prop-2"
+    ],
+    "savedProperties": [
+      "prop-1",
+      "prop-2"
+    ],
+    "savedRoommates": [
+      "rm-1"
+    ],
+    "roommateType": "looking_for_room",
+    "roommateStatus": "looking_for_room",
+    "createdAt": "2026-10-04T05:15:35.701Z"
+  },
+  {
+    "id": "usr-host-1",
+    "name": "Rameshwar Shukla",
+    "email": "rameshwar@homelink.in",
+    "phone": "+91 9826199999",
+    "passwordHash": "86f25ae01304d408f3292047ed80dc86:b1263819757166e87c478a479913c5e727711be0e4933b82c1c0a18a342ffc7c153450196ac0979f722b366616450e30af9368d76bc0cf917a6d2f98f50963c0",
+    "role": "Host / Owner",
+    "city": "Rewa, MP",
+    "isVerified": true,
+    "govtIdApproved": true,
+    "trustLevel": "Verified Host",
+    "memberSince": "Jan 2023",
+    "ownedPropertyIds": [
+      "prop-1",
+      "prop-2"
+    ],
+    "savedProperties": [],
+    "savedRoommates": [],
+    "roommateType": "looking_for_roommate",
+    "roommateStatus": "looking_for_roommate",
+    "createdAt": "2026-10-04T05:15:35.785Z"
+  },
+  {
+    "id": "usr-9826198765",
+    "createdAt": "2026-10-04T05:16:04.860Z",
+    "savedProperties": [],
+    "savedRoommates": [],
+    "ownedPropertyIds": [],
+    "isVerified": true,
+    "trustLevel": "Tier 1 Standard",
+    "memberSince": "Today",
+    "name": "Priyanshu Sharma",
+    "email": "priyanshu@gmail.com",
+    "phone": "+91 9826198765",
+    "passwordHash": "1ceb018c0bc083984326591e5d2a81c1:4611e9291c8f635010799dd2464babb1308fd155a5295e66389487d22d9810a0db71b1de54d6c797323d6beff56f7dc76ab0a885c233c947268eac289cb9856e",
+    "role": "Renter & Seeker",
+    "city": "Delhi NCR",
+    "govtIdApproved": false,
+    "collegeIdApproved": false,
+    "roommateType": "looking_for_room",
+    "roommateStatus": "looking_for_room"
+  },
+  {
+    "id": "usr-9876543210",
+    "createdAt": "2026-10-04T05:36:44.459Z",
+    "savedProperties": [],
+    "savedRoommates": [],
+    "ownedPropertyIds": [],
+    "isVerified": true,
+    "trustLevel": "Tier 1 Standard",
+    "memberSince": "Today",
+    "name": "raj",
+    "email": "raj@gmail.com",
+    "phone": "+91 9876543210",
+    "passwordHash": "cf2c922f1162545c669a1779998ae2f8:7d63b823cfe24eb7f1e615566eed76020b93778195812f5af8ee2da7b890f55e9e504ad4f4fc50ee96e57f8777fc3aa2b8d9bd0b5bddc90401f11580be482614",
+    "role": "Renter & Seeker",
+    "city": "Bangalore",
+    "govtIdApproved": false,
+    "collegeIdApproved": false,
+    "roommateType": "looking_for_room",
+    "roommateStatus": "looking_for_room"
+  },
+  {
+    "id": "usr-1791118698589",
+    "createdAt": "2026-10-04T12:58:18.665Z",
+    "savedProperties": [],
+    "savedRoommates": [],
+    "ownedPropertyIds": [],
+    "isVerified": true,
+    "trustLevel": "Tier 1 Standard",
+    "memberSince": "Today",
+    "name": "raj",
+    "email": "raj@gamil.com",
+    "phone": "",
+    "passwordHash": "dcb79cdebd0662e69ccfb3aa878c3e88:39b0193cc256a4ee07c2ff6965a2feb309f4413c73e0ba00a32cd7dfd80e3ae94ce52136174058b66b9cf668d2539a5c431516520ee2a87eca34d6e2fb323521",
+    "role": "Renter & Seeker",
+    "city": "Rewa, MP"
+  }
+]

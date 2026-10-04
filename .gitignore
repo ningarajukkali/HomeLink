@@ -1,5 +1,4 @@
-# Backend (Excluded from frontend deployment repository)
-backend/
+# Temporary and scratch files
 scratch/
 *.mjs
 

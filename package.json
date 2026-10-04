@@ -2,12 +2,20 @@
   "name": "homelink",
   "version": "2.0.0",
   "private": true,
-  "description": "HomeLink - Verified Student & Bachelor Rental Platform (Frontend & Documentation)",
+  "description": "HomeLink - Verified Student & Bachelor Rental Platform (Full-Stack Monorepo)",
   "scripts": {
     "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
     "build": "npm --prefix frontend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "start": "npm --prefix backend run start",
+    "start:backend": "npm --prefix backend run start",
+    "start:frontend": "npm --prefix frontend run preview",
     "preview": "npm --prefix frontend run preview",
-    "install:frontend": "npm --prefix frontend install"
+    "install:frontend": "npm --prefix frontend install",
+    "install:backend": "npm --prefix backend install",
+    "install:all": "npm --prefix frontend install && npm --prefix backend install"
   },
   "keywords": [
     "homelink",

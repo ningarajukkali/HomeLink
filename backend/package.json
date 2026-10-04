@@ -1,0 +1,29 @@
+{
+  "name": "homelink-backend",
+  "version": "2.0.0",
+  "description": "Backend REST API for HomeLink verified rental platform",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/scripts/seedDatabase.js"
+  },
+  "keywords": [
+    "homelink",
+    "rental",
+    "express",
+    "mongodb",
+    "gemini-ai",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^9.10.4",
+    "morgan": "^1.10.0"
+  }
+}
