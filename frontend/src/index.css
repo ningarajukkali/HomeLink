@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   HomeLink Design System Theme Tokens
+   Brand Colors, Typography & Surface Definitions
+   ========================================================================== */
+@theme {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --color-primary: #006b5a;
+  --color-primary-container: #00a88e;
+  --color-primary-fixed: #79f8da;
+  --color-primary-fixed-dim: #59dbbf;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #00342b;
+  --color-on-primary-fixed: #00201a;
+  --color-on-primary-fixed-variant: #005143;
+  --color-inverse-primary: #59dbbf;
+
+  --color-secondary: #006a63;
+  --color-secondary-container: #99efe5;
+  --color-secondary-fixed: #9cf2e8;
+  --color-secondary-fixed-dim: #80d5cb;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #006f67;
+  --color-on-secondary-fixed: #00201d;
+  --color-on-secondary-fixed-variant: #00504a;
+
+  --color-tertiary: #00668a;
+  --color-tertiary-container: #00a0d7;
+  --color-tertiary-fixed: #c4e7ff;
+  --color-tertiary-fixed-dim: #7bd0ff;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #003246;
+  --color-on-tertiary-fixed: #001e2c;
+  --color-on-tertiary-fixed-variant: #004c69;
+
+  --color-surface: #faf8ff;
+  --color-surface-dim: #d2d9f4;
+  --color-surface-bright: #faf8ff;
+  --color-surface-container: #eaedff;
+  --color-surface-container-low: #f2f3ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #e2e7ff;
+  --color-surface-container-highest: #dae2fd;
+  --color-surface-variant: #dae2fd;
+  --color-surface-tint: #006b5a;
+
+  --color-on-surface: #131b2e;
+  --color-on-surface-variant: #3c4945;
+  --color-inverse-surface: #283044;
+  --color-inverse-on-surface: #eef0ff;
+  --color-on-background: #131b2e;
+  --color-background: #faf8ff;
+
+  --color-outline: #6c7a75;
+  --color-outline-variant: #bbcac4;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+}
+
+/* ==========================================================================
+   Google Material Symbols Outlined Icon Font Settings
+   ========================================================================== */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   Modern Rounded Scrollbars
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f2f3ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #bbcac4;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6c7a75;
+}

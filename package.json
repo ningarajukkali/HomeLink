@@ -1,0 +1,23 @@
+{
+  "name": "homelink",
+  "version": "2.0.0",
+  "private": true,
+  "description": "HomeLink - Verified Student & Bachelor Rental Platform (Frontend & Documentation)",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "install:frontend": "npm --prefix frontend install"
+  },
+  "keywords": [
+    "homelink",
+    "rental-housing",
+    "full-stack",
+    "react",
+    "vite",
+    "express",
+    "gemini-ai",
+    "mongodb"
+  ],
+  "author": ""
+}
