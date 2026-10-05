@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../../context/AppContext';
 
 export default function Header() {
   const {
@@ -7,6 +7,9 @@ export default function Header() {
     navigate,
     unreadNotificationsCount,
     currentUser,
+    isAuthenticated,
+    isOwner,
+    isStudentOrParent,
     setAuthModalOpen,
     comparePropertyIds,
     logoutUser,
@@ -36,12 +39,24 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const navLinks = [
-    { id: 'dashboard', label: 'Dashboard', icon: 'space_dashboard' },
+  // Show dashboard ONLY after user login
+  // Student/Parent -> Normal Dashboard
+  // Owner -> Owner Dashboard only
+  const navLinks = [];
+
+  if (isAuthenticated) {
+    if (isOwner) {
+      navLinks.push({ id: 'owner-dashboard', label: 'Owner Dashboard', icon: 'storefront' });
+    } else {
+      navLinks.push({ id: 'dashboard', label: 'Dashboard', icon: 'space_dashboard' });
+    }
+  }
+
+  // Common discovery links
+  navLinks.push(
     { id: 'rentals', label: 'Find a Rental', icon: 'real_estate_agent' },
-    { id: 'roommates', label: 'Roommates', icon: 'group' },
-    { id: 'owner-dashboard', label: 'Owner Dashboard', icon: 'storefront' },
-  ];
+    { id: 'roommates', label: 'Roommates', icon: 'group' }
+  );
 
   const currentCityObj = CITIES?.find(c => c.id === selectedCity) || {
     id: selectedCity,
@@ -55,7 +70,15 @@ export default function Header() {
         {/* Brand Logo & Interactive City Selector */}
         <div className="flex items-center gap-3 shrink-0">
           <button
-            onClick={() => navigate('welcome')}
+            onClick={() => {
+              if (!isAuthenticated) {
+                navigate('welcome');
+              } else if (isOwner) {
+                navigate('owner-dashboard');
+              } else {
+                navigate('dashboard');
+              }
+            }}
             className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none"
           >
             <div className="w-9 h-9 rounded-xl bg-primary-container text-white flex items-center justify-center shadow-sm shadow-primary-container/30 group-hover:scale-105 transition-transform duration-200">
@@ -291,7 +314,7 @@ export default function Header() {
           </button>
 
           {/* Profile Capsule or Sign In Button */}
-          {(!currentUser || currentUser.name === 'Guest User' || currentUser.trustLevel === 'Unverified Guest') ? (
+          {!isAuthenticated ? (
             <button
               onClick={() => setAuthModalOpen(true)}
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-primary-container text-white text-xs font-bold shadow-xs hover:bg-primary active:scale-95 transition-all whitespace-nowrap cursor-pointer ml-0.5"
@@ -323,11 +346,35 @@ export default function Header() {
                   <p className="text-xs font-extrabold text-on-surface truncate">{currentUser?.name}</p>
                   <p className="text-[11px] text-outline font-medium truncate mt-0.5">{currentUser?.phoneMasked || currentUser?.role || 'Verified Member'}</p>
                   <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-primary-container/15 text-primary border border-primary-container/30">
-                    {currentUser?.role || 'Verified Member'}
+                    {currentUser?.role || (isOwner ? 'Property Owner' : 'Student / Parent')}
                   </span>
                 </div>
 
                 <div className="py-1">
+                  {isOwner ? (
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen(false);
+                        navigate('owner-dashboard');
+                      }}
+                      className="w-full px-4 py-2 text-left text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2.5 transition-colors cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-lg text-secondary">storefront</span>
+                      <span>Owner Dashboard</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen(false);
+                        navigate('dashboard');
+                      }}
+                      className="w-full px-4 py-2 text-left text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2.5 transition-colors cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-lg text-primary-container">space_dashboard</span>
+                      <span>Student / Tenant Dashboard</span>
+                    </button>
+                  )}
+
                   <button
                     onClick={() => {
                       setIsUserMenuOpen(false);
@@ -337,17 +384,6 @@ export default function Header() {
                   >
                     <span className="material-symbols-outlined text-lg text-primary-container">person</span>
                     <span>My Profile & KYC Settings</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setIsUserMenuOpen(false);
-                      navigate('owner-dashboard');
-                    }}
-                    className="w-full px-4 py-2 text-left text-xs font-semibold text-on-surface hover:bg-surface-container flex items-center gap-2.5 transition-colors cursor-pointer"
-                  >
-                    <span className="material-symbols-outlined text-lg text-secondary">dashboard_customize</span>
-                    <span>Host / Owner Dashboard</span>
                   </button>
 
                   <button

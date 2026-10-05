@@ -1,15 +1,21 @@
 import React from 'react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../../context/AppContext';
 
 export default function BottomNav() {
-  const { currentRoute, navigate } = useApp();
+  const { currentRoute, navigate, isAuthenticated, isOwner } = useApp();
+
+  const primaryHomeTab = !isAuthenticated
+    ? { id: 'welcome', label: 'Explore', icon: 'explore' }
+    : (isOwner 
+        ? { id: 'owner-dashboard', label: 'Dashboard', icon: 'storefront' }
+        : { id: 'dashboard', label: 'Dashboard', icon: 'space_dashboard' });
 
   const navItems = [
-    { id: 'dashboard', label: 'Home', icon: 'home' },
+    primaryHomeTab,
     { id: 'rentals', label: 'Rentals', icon: 'apartment' },
     { id: 'roommates', label: 'Roommates', icon: 'group' },
     { id: 'chat', label: 'Chat', icon: 'chat' },
-    { id: 'profile', label: 'Profile', icon: 'person' },
+    { id: 'profile', label: isAuthenticated ? 'Profile' : 'Sign In', icon: 'person' },
   ];
 
   return (

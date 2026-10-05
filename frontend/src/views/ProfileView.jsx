@@ -11,7 +11,10 @@ export default function ProfileView() {
     updateCurrentUserRoommateStatus,
     navigate,
     goBack,
-    setAuthModalOpen
+    setAuthModalOpen,
+    isOwner,
+    isStudentOrParent,
+    logoutUser
   } = useApp();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -265,16 +268,29 @@ export default function ProfileView() {
 
       {/* Quick Navigation Menu */}
       <div className="bg-surface-container-lowest rounded-3xl border border-outline-variant/40 shadow-sm overflow-hidden divide-y divide-outline-variant/30">
-        <button
-          onClick={() => navigate('owner-dashboard')}
-          className="w-full p-4 flex items-center justify-between hover:bg-surface-container transition-colors text-left cursor-pointer"
-        >
-          <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary-container text-xl">real_estate_agent</span>
-            <span className="text-xs font-bold text-on-surface">My Properties (Availability Management)</span>
-          </div>
-          <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
-        </button>
+        {isOwner ? (
+          <button
+            onClick={() => navigate('owner-dashboard')}
+            className="w-full p-4 flex items-center justify-between hover:bg-surface-container transition-colors text-left cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-primary-container text-xl">real_estate_agent</span>
+              <span className="text-xs font-bold text-on-surface">My Properties (Owner Dashboard)</span>
+            </div>
+            <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate('dashboard')}
+            className="w-full p-4 flex items-center justify-between hover:bg-surface-container transition-colors text-left cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-primary-container text-xl">dashboard</span>
+              <span className="text-xs font-bold text-on-surface">My Student / Parent Dashboard</span>
+            </div>
+            <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
+          </button>
+        )}
 
         <button
           onClick={() => navigate('roommates')}
@@ -355,15 +371,27 @@ export default function ProfileView() {
       </div>
 
       {/* Logout Action */}
-      <button
-        onClick={() => {
-          setAuthModalOpen(true);
-        }}
-        className="w-full py-3.5 px-4 rounded-2xl bg-surface-container hover:bg-surface-container-high text-error font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
-      >
-        <span className="material-symbols-outlined text-lg">logout</span>
-        <span>Switch Account / Sign In with Another Number</span>
-      </button>
+      <div className="flex gap-2.5">
+        <button
+          onClick={() => {
+            if (logoutUser) logoutUser();
+            else navigate('welcome');
+          }}
+          className="flex-1 py-3.5 px-4 rounded-2xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
+        >
+          <span className="material-symbols-outlined text-lg">logout</span>
+          <span>Log Out</span>
+        </button>
+        <button
+          onClick={() => {
+            setAuthModalOpen(true);
+          }}
+          className="flex-1 py-3.5 px-4 rounded-2xl bg-surface-container hover:bg-surface-container-high text-on-surface font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
+        >
+          <span className="material-symbols-outlined text-lg">switch_account</span>
+          <span>Switch Account</span>
+        </button>
+      </div>
 
       {/* Confirmation Modal */}
       <RoommateFoundModal

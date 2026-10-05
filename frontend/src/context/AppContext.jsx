@@ -5,6 +5,7 @@ import {
   INITIAL_CHATS,
   INITIAL_NOTIFICATIONS,
   CURRENT_USER,
+  GUEST_USER,
   CITIES
 } from '../data/mockData';
 import { api } from '../services';
@@ -110,14 +111,41 @@ export function AppProvider({ children }) {
     }
   };
 
-  // Auth & User State
+  // Auth & User State (Defaults to GUEST_USER until user signs in)
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('homelink_user');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.name && parsed.name !== 'Guest User') {
+          return parsed;
+        }
+      }
     } catch {}
-    return CURRENT_USER;
+    return GUEST_USER;
   });
+
+  // Dynamic Authentication and Role Intelligence
+  const isAuthenticated = Boolean(
+    currentUser &&
+    currentUser.name !== 'Guest User' &&
+    currentUser.trustLevel !== 'Unverified Guest' &&
+    currentUser.id !== 'usr-guest'
+  );
+
+  const isOwner = Boolean(
+    isAuthenticated && (
+      currentUser?.role === 'Host / Owner' ||
+      currentUser?.role === 'Property Owner' ||
+      currentUser?.role === 'owner' ||
+      currentUser?.role === 'host' ||
+      currentUser?.role?.toLowerCase()?.includes('owner') ||
+      currentUser?.role?.toLowerCase()?.includes('host')
+    )
+  );
+
+  const isStudentOrParent = Boolean(isAuthenticated && !isOwner);
+
   const [isAuthModalOpen, setAuthModalOpen] = useState(false);
   const [authStep, setAuthStep] = useState('phone'); // 'phone' | 'otp' | 'success'
   const [authPhone, setAuthPhone] = useState('');
@@ -409,29 +437,10 @@ export function AppProvider({ children }) {
     api.auth.logout().catch(() => {});
     localStorage.removeItem('homelink_user');
     localStorage.removeItem('homelink_token');
-    const freshGuest = {
-      id: `usr-${Date.now()}`,
-      name: 'Guest User',
-      role: 'Renter & Seeker',
-      city: 'Rewa, MP',
-      phoneMasked: '+91 ••••• •••••',
-      emailMasked: '',
-      isVerified: false,
-      govtIdApproved: false,
-      collegeIdApproved: false,
-      trustLevel: 'Unverified Guest',
-      memberSince: 'Today',
-      activeListingsCount: 0,
-      savedProperties: [],
-      savedRoommates: [],
-      ownedPropertyIds: [], // Fresh new guest starts with 0 listings!
-      roommateType: 'looking_for_room',
-      roommateStatus: 'looking_for_room'
-    };
-    setCurrentUser(freshGuest);
+    setCurrentUser(GUEST_USER);
     setSavedPropertyIds([]);
     setSavedRoommateIds([]);
-    navigate('dashboard');
+    navigate('welcome');
   };
 
 
@@ -610,6 +619,9 @@ export function AppProvider({ children }) {
         goBack,
         currentUser,
         setCurrentUser,
+        isAuthenticated,
+        isOwner,
+        isStudentOrParent,
         loginUser,
         logoutUser,
         selectedCity,

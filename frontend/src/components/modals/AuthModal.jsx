@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useApp } from '../context/AppContext';
-import { api } from '../services';
+import { useApp } from '../../context/AppContext';
+import { api } from '../../services';
 
 export default function AuthModal() {
   const {
@@ -25,7 +25,7 @@ export default function AuthModal() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Renter & Seeker'); // 'Renter & Seeker' | 'Host / Owner'
+  const [role, setRole] = useState('Student / Parent (Renter)'); // 'Student / Parent (Renter)' | 'Host / Owner'
   const [city, setCity] = useState(selectedCity === 'All Cities' ? 'Delhi NCR' : selectedCity);
   const [agreeTerms, setAgreeTerms] = useState(true);
 
@@ -80,7 +80,8 @@ export default function AuthModal() {
         setSuccessMsg(`Welcome back, ${user.name}!`);
         setTimeout(() => {
           handleClose();
-          if (user.role === 'Host / Owner') {
+          const userRole = (user?.role || '').toLowerCase();
+          if (userRole.includes('owner') || userRole.includes('host')) {
             navigate('owner-dashboard');
           } else {
             navigate('dashboard');
@@ -153,7 +154,8 @@ export default function AuthModal() {
         setSuccessMsg(`Verified! Welcome to HomeLink, ${user.name}`);
         setTimeout(() => {
           handleClose();
-          if (user.role === 'Host / Owner') {
+          const userRole = (user?.role || '').toLowerCase();
+          if (userRole.includes('owner') || userRole.includes('host')) {
             navigate('owner-dashboard');
           } else {
             navigate('dashboard');
@@ -210,7 +212,8 @@ export default function AuthModal() {
         setSuccessMsg(`Account created! Welcome, ${user.name}`);
         setTimeout(() => {
           handleClose();
-          if (user.role === 'Host / Owner') {
+          const userRole = (user?.role || '').toLowerCase();
+          if (userRole.includes('owner') || userRole.includes('host')) {
             navigate('owner-dashboard');
           } else {
             navigate('dashboard');
@@ -239,8 +242,12 @@ export default function AuthModal() {
         const user = res?.user || res?.data?.user;
         const token = res?.token || res?.accessToken;
         if (user) {
-          loginUser(user, token);
-          setSuccessMsg('Logged in as Aman Verma (Resident)!');
+          const studentUser = {
+            ...user,
+            role: 'Student / Parent (Renter)'
+          };
+          loginUser(studentUser, token);
+          setSuccessMsg('Logged in as Student / Parent (Aman Verma)!');
           setTimeout(() => {
             handleClose();
             navigate('dashboard');
@@ -259,8 +266,12 @@ export default function AuthModal() {
         const user = res?.user || res?.data?.user;
         const token = res?.token || res?.accessToken;
         if (user) {
-          loginUser(user, token);
-          setSuccessMsg('Logged in as Rameshwar Shukla (Host)!');
+          const ownerUser = {
+            ...user,
+            role: 'Host / Owner'
+          };
+          loginUser(ownerUser, token);
+          setSuccessMsg('Logged in as Property Owner (Rameshwar Shukla)!');
           setTimeout(() => {
             handleClose();
             navigate('owner-dashboard');
@@ -558,7 +569,7 @@ export default function AuthModal() {
                       Aman Verma
                     </span>
                   </div>
-                  <span className="text-[10px] text-outline block mt-0.5">Resident / Seeker</span>
+                  <span className="text-[10px] text-outline block mt-0.5">🎓 Student / Parent (Normal)</span>
                 </button>
 
                 <button
@@ -574,7 +585,7 @@ export default function AuthModal() {
                       R. Shukla
                     </span>
                   </div>
-                  <span className="text-[10px] text-outline block mt-0.5">Property Host / Owner</span>
+                  <span className="text-[10px] text-outline block mt-0.5">🏠 Property Owner (Host)</span>
                 </button>
               </div>
             </div>
@@ -592,17 +603,17 @@ export default function AuthModal() {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
-                  onClick={() => setRole('Renter & Seeker')}
+                  onClick={() => setRole('Student / Parent (Renter)')}
                   className={`p-2.5 rounded-xl border text-left flex items-center gap-2 cursor-pointer transition-all ${
-                    role === 'Renter & Seeker'
+                    role === 'Student / Parent (Renter)' || role === 'Renter & Seeker'
                       ? 'border-primary-container bg-primary-container/10 text-primary-container font-extrabold ring-1 ring-primary-container'
                       : 'border-outline-variant bg-surface-container-low text-on-surface-variant'
                   }`}
                 >
-                  <span className="material-symbols-outlined text-lg">search</span>
+                  <span className="material-symbols-outlined text-lg">school</span>
                   <div>
-                    <div className="text-xs font-bold">Room Seeker</div>
-                    <div className="text-[10px] opacity-75">Student / Bachelor</div>
+                    <div className="text-xs font-bold">Student / Parent</div>
+                    <div className="text-[10px] opacity-75">Student, Parent or Seeker</div>
                   </div>
                 </button>
 
@@ -617,8 +628,8 @@ export default function AuthModal() {
                 >
                   <span className="material-symbols-outlined text-lg">real_estate_agent</span>
                   <div>
-                    <div className="text-xs font-bold">Property Host</div>
-                    <div className="text-[10px] opacity-75">Owner / Landlord</div>
+                    <div className="text-xs font-bold">Property Owner</div>
+                    <div className="text-[10px] opacity-75">Landlord or PG Host</div>
                   </div>
                 </button>
               </div>

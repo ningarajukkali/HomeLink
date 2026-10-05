@@ -1100,10 +1100,30 @@ export const INITIAL_NOTIFICATIONS = [
   }
 ];
 
+export const GUEST_USER = {
+  id: 'usr-guest',
+  name: 'Guest User',
+  role: 'Guest',
+  city: 'Delhi NCR',
+  phoneMasked: '',
+  emailMasked: '',
+  isVerified: false,
+  govtIdApproved: false,
+  collegeIdApproved: false,
+  trustLevel: 'Unverified Guest',
+  memberSince: 'Today',
+  activeListingsCount: 0,
+  savedProperties: [],
+  savedRoommates: [],
+  ownedPropertyIds: [],
+  roommateType: 'looking_for_room',
+  roommateStatus: 'looking_for_room'
+};
+
 export const CURRENT_USER = {
   id: 'usr-current',
   name: 'Aman Verma',
-  role: 'Renter & Seeker',
+  role: 'Student / Parent (Renter)',
   city: 'Rewa, MP',
   phoneMasked: '+91 98261 •••••',
   emailMasked: 'aman.v••••@gmail.com',
@@ -1112,10 +1132,10 @@ export const CURRENT_USER = {
   collegeIdApproved: true,
   trustLevel: 'Tier 3 Authenticated',
   memberSince: 'Aug 2023',
-  activeListingsCount: 2,
+  activeListingsCount: 0,
   savedProperties: ['prop-1', 'prop-2'],
   savedRoommates: ['rm-1'],
-  ownedPropertyIds: ['prop-1', 'prop-2'],
+  ownedPropertyIds: [],
   roommateType: 'looking_for_room', // 'looking_for_room' | 'looking_for_roommate'
   roommateStatus: 'looking_for_room' // 'looking_for_room' | 'found_room' | 'looking_for_roommate' | 'roommate_found'
 };

@@ -33,10 +33,13 @@ export default function DashboardView() {
       {/* Greeting Banner & Location Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-primary/10 via-primary-container/10 to-transparent p-6 rounded-3xl border border-primary-container/20">
         <div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <span className="text-xl">👋</span>
             <span className="text-sm font-bold text-outline">Good day,</span>
             <span className="text-base font-extrabold text-on-surface">{currentUser.name}</span>
+            <span className="px-2.5 py-0.5 rounded-full bg-primary-container/20 text-primary-container border border-primary-container/30 text-[10px] font-extrabold uppercase tracking-wide">
+              🎓 Student / Parent Dashboard
+            </span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black text-on-surface tracking-tight">
             Explore Housing in <span className="text-primary-container">Rewa</span>

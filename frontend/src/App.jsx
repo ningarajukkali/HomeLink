@@ -42,7 +42,7 @@ function ViewLoadingFallback() {
 }
 
 export default function App() {
-  const { currentRoute } = useApp();
+  const { currentRoute, isAuthenticated, isOwner } = useApp();
 
   // Scroll to top on every view navigation
   useEffect(() => {
@@ -54,7 +54,15 @@ export default function App() {
       case 'welcome':
         return <WelcomeView />;
       case 'dashboard':
+        // Show dashboard only after login; route based on role
+        if (!isAuthenticated) return <WelcomeView />;
+        if (isOwner) return <OwnerDashboardView />;
         return <DashboardView />;
+      case 'owner-dashboard':
+        // Show owner dashboard only if user is logged in as owner
+        if (!isAuthenticated) return <WelcomeView />;
+        if (!isOwner) return <DashboardView />;
+        return <OwnerDashboardView />;
       case 'rentals':
         return <RentalsView />;
       case 'rental-filters':
@@ -65,8 +73,6 @@ export default function App() {
         return <CompareView />;
       case 'list-property':
         return <ListPropertyWizardView />;
-      case 'owner-dashboard':
-        return <OwnerDashboardView />;
       case 'featured-plans':
         return <FeaturedListingView />;
       case 'roommates':
@@ -87,6 +93,8 @@ export default function App() {
       case 'safety':
         return <SafetyView />;
       default:
+        if (!isAuthenticated) return <WelcomeView />;
+        if (isOwner) return <OwnerDashboardView />;
         return <DashboardView />;
     }
   };
