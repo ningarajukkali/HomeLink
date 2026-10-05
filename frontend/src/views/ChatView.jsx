@@ -141,8 +141,8 @@ export default function ChatView() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Message Input Bar */}
-      <form onSubmit={handleSend} className="pt-2 shrink-0">
+      {/* Message Input Bar with mobile safe-area spacing */}
+      <form onSubmit={handleSend} className="pt-2 shrink-0 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <div className="flex items-center gap-2 bg-surface-container-lowest p-2 rounded-2xl border border-outline-variant/60 shadow-md focus-within:border-primary-container transition-all">
           <button
             type="button"

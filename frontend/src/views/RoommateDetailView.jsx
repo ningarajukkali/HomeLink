@@ -188,7 +188,7 @@ export default function RoommateDetailView() {
       </div>
 
       {/* Sticky Bottom Action */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 z-30">
+      <div className="fixed bottom-0 left-0 right-0 p-3 sm:p-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 z-30 shadow-2xl">
         <div className="max-w-xl mx-auto flex items-center gap-3">
           {isFound ? (
             <div className="w-full py-3.5 px-4 rounded-xl bg-rose-500/10 text-rose-700 font-bold text-sm border border-rose-500/20 flex items-center justify-center gap-2">

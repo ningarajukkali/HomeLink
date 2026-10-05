@@ -368,12 +368,12 @@ export default function RentalDetailView() {
       </div>
 
       {/* Sticky Bottom Actions Bar */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 z-30">
+      <div className="fixed bottom-0 left-0 right-0 p-3 sm:p-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 z-30 shadow-2xl">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center justify-between w-full sm:w-auto">
             <div>
-              <span className="text-xs text-outline font-semibold block">Total Rent</span>
-              <span className="text-xl font-black text-on-surface">
+              <span className="text-[11px] text-outline font-semibold block">Total Rent</span>
+              <span className="text-xl sm:text-2xl font-black text-on-surface">
                 ₹{property.rent.toLocaleString('en-IN')}<span className="text-xs text-outline font-normal">/mo</span>
               </span>
             </div>
@@ -382,12 +382,12 @@ export default function RentalDetailView() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             {isRented ? (
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <span className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-rose-500/10 text-rose-700 text-xs font-bold border border-rose-500/20 flex items-center justify-center gap-1.5">
                   <span className="material-symbols-outlined text-base">cancel</span>
-                  <span>Property Rented • Inquiries Closed</span>
+                  <span>Property Rented</span>
                 </span>
                 {isOwner && (
                   <button
@@ -416,34 +416,34 @@ export default function RentalDetailView() {
                 )}
               </div>
             ) : (
-              <>
+              <div className="flex items-center gap-2 w-full sm:w-auto">
                 {isOwner && (
                   <button
                     onClick={() => setIsRentedModalOpen(true)}
-                    className="py-3 px-3.5 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-700 hover:text-white border border-rose-500/20 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="py-3 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-700 hover:text-white border border-rose-500/20 font-bold text-xs flex items-center justify-center gap-1 transition-colors cursor-pointer shrink-0"
                   >
                     <span className="material-symbols-outlined text-base">check_circle</span>
-                    <span>Mark as Rented</span>
+                    <span className="hidden xs:inline">Mark Rented</span>
                   </button>
                 )}
 
                 <button
                   onClick={() => setShowCallModal(true)}
-                  className="px-4 py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="flex-1 sm:flex-initial py-3 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer active:scale-95"
                 >
                   <span className="material-symbols-outlined text-base text-primary-container">call</span>
-                  <span className="hidden sm:inline">Call Host</span>
+                  <span>Call Host</span>
                 </button>
 
                 <button
                   onClick={handleBookVisit}
                   disabled={inquirySent}
-                  className="px-6 py-3 rounded-xl bg-primary-container hover:bg-primary text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-80"
+                  className="flex-[2] sm:flex-initial py-3 px-5 rounded-xl bg-primary-container hover:bg-primary text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-80 active:scale-95"
                 >
                   <span className="material-symbols-outlined text-base">calendar_month</span>
                   <span>{inquirySent ? 'Visit Requested ✓' : 'Schedule Free Visit'}</span>
                 </button>
-              </>
+              </div>
             )}
           </div>
         </div>

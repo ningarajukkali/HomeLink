@@ -204,8 +204,8 @@ export default function RoommatesView() {
           }}
         />
 
-        {/* Diet Filter Chips */}
-        <div className="flex items-center justify-between gap-2 overflow-x-auto pt-1">
+        {/* Diet Filter Chips - edge-to-edge on mobile */}
+        <div className="flex items-center gap-2 overflow-x-auto pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
           <div className="flex items-center gap-1.5 shrink-0">
             <span className="text-[11px] font-bold text-outline uppercase tracking-wider mr-1">Diet:</span>
             {['All', 'Vegetarian', 'Non-Vegetarian'].map((diet) => (

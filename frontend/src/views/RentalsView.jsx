@@ -187,7 +187,7 @@ export default function RentalsView() {
       <DemoNoticeBanner />
 
       {/* Quick City Selector Chips with Live GPS Auto-Detect */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
         <span className="text-[11px] font-bold text-outline uppercase tracking-wider shrink-0 flex items-center gap-1 mr-1">
           <span className="material-symbols-outlined text-sm text-primary">location_on</span>
           City:
@@ -309,7 +309,7 @@ export default function RentalsView() {
       )}
 
       {/* Property Type Category Chips */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
         <span className="text-[11px] font-bold text-outline uppercase tracking-wider shrink-0 mr-1">
           Type:
         </span>
