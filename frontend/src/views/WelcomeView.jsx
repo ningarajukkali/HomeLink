@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 
 export default function WelcomeView() {
-  const { navigate, setAuthModalOpen } = useApp();
+  const { navigate, setAuthModalOpen, isAuthenticated } = useApp();
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex flex-col justify-between max-w-xl mx-auto px-4 py-8 md:py-12">
@@ -75,7 +75,13 @@ export default function WelcomeView() {
 
         {/* Card 3: List Your Property */}
         <button
-          onClick={() => navigate('list-property')}
+          onClick={() => {
+            if (!isAuthenticated) {
+              setAuthModalOpen(true);
+            } else {
+              navigate('list-property');
+            }
+          }}
           className="group w-full p-4 md:p-5 rounded-2xl bg-gradient-to-r from-surface-container-low to-surface-container-lowest border border-primary-container/30 hover:border-primary-container shadow-sm hover:shadow-xl transition-all duration-300 flex items-center justify-between text-left cursor-pointer"
         >
           <div className="flex items-center gap-4">

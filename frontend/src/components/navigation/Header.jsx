@@ -79,35 +79,35 @@ export default function Header() {
                 navigate('dashboard');
               }
             }}
-            className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none"
+            className="flex items-center gap-1.5 sm:gap-2.5 group text-left cursor-pointer focus:outline-none shrink-0"
           >
-            <div className="w-9 h-9 rounded-xl bg-primary-container text-white flex items-center justify-center shadow-sm shadow-primary-container/30 group-hover:scale-105 transition-transform duration-200">
-              <span className="material-symbols-outlined text-2xl font-bold">home</span>
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-primary-container text-white flex items-center justify-center shadow-sm shadow-primary-container/30 group-hover:scale-105 transition-transform duration-200">
+              <span className="material-symbols-outlined text-xl sm:text-2xl font-bold">home</span>
             </div>
             <div>
-              <span className="text-xl font-black tracking-tight text-on-surface flex items-center gap-0.5 leading-tight">
+              <span className="text-lg sm:text-xl font-black tracking-tight text-on-surface flex items-center gap-0.5 leading-tight">
                 Home<span className="text-primary-container">Link</span>
               </span>
-              <span className="block text-[9.5px] uppercase font-bold tracking-[0.14em] text-outline leading-none mt-0.5">
+              <span className="hidden sm:block text-[9.5px] uppercase font-bold tracking-[0.14em] text-outline leading-none mt-0.5">
                 Verified Housing
               </span>
             </div>
           </button>
 
           {/* Interactive Multi-City Selector Dropdown */}
-          <div className="relative" ref={cityMenuRef}>
+          <div className="relative shrink-0" ref={cityMenuRef}>
             <button
               onClick={() => setIsCityMenuOpen(!isCityMenuOpen)}
-              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-secondary text-xs font-bold border border-outline-variant/40 transition-all cursor-pointer shadow-2xs group"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-secondary text-xs font-bold border border-outline-variant/40 transition-all cursor-pointer shadow-2xs group"
               title="Click to switch city or auto-detect location"
             >
               <span className={`w-2 h-2 rounded-full shrink-0 ${userLocation?.detected ? 'bg-emerald-500 animate-ping' : 'bg-primary-container animate-pulse'}`}></span>
-              <span className="text-on-surface font-extrabold max-w-[130px] truncate">
+              <span className="text-on-surface font-extrabold max-w-[70px] xs:max-w-[95px] sm:max-w-[130px] truncate text-[11px] sm:text-xs">
                 {userLocation?.detected && userLocation?.locality 
                   ? userLocation.locality 
                   : (currentCityObj.badge || currentCityObj.name)}
               </span>
-              <span className={`material-symbols-outlined text-[16px] text-outline group-hover:text-on-surface transition-transform duration-200 ${isCityMenuOpen ? 'rotate-180' : ''}`}>
+              <span className={`material-symbols-outlined text-[15px] sm:text-[16px] text-outline group-hover:text-on-surface transition-transform duration-200 ${isCityMenuOpen ? 'rotate-180' : ''}`}>
                 expand_more
               </span>
             </button>
@@ -254,31 +254,22 @@ export default function Header() {
               </button>
             );
           })}
-
-          {/* List Property Free CTA - using theme secondary-container */}
-          <button
-            onClick={() => navigate('list-property')}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-secondary-container text-on-secondary-container hover:bg-secondary-container/85 border border-secondary-container/60 shadow-xs hover:shadow-sm active:scale-95 transition-all whitespace-nowrap cursor-pointer ml-1"
-          >
-            <span className="material-symbols-outlined text-[17px]">add_circle</span>
-            <span>List Free</span>
-          </button>
         </nav>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Right Actions - Fully responsive for mobile & desktop */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Compare Badge button if items selected */}
           {comparePropertyIds.length > 0 && (
             <button
               onClick={() => navigate('compare')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shadow-2xs ${
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shadow-2xs ${
                 currentRoute === 'compare'
                   ? 'bg-primary-container text-white shadow-xs'
                   : 'bg-primary-container/15 text-primary border border-primary-container/30 hover:bg-primary-container/20'
               }`}
               title="View property comparison"
             >
-              <span className="material-symbols-outlined text-[16px]">compare_arrows</span>
+              <span className="material-symbols-outlined text-[15px] sm:text-[16px]">compare_arrows</span>
               <span className="hidden sm:inline">Compare</span>
               <span className="bg-primary-container text-white px-1.5 py-0.2 rounded-full text-[10px] font-extrabold">
                 {comparePropertyIds.length}
@@ -286,52 +277,68 @@ export default function Header() {
             </button>
           )}
 
+          {/* List CTA Button - Renamed to 'List', prompts login if unauthenticated */}
+          <button
+            onClick={() => {
+              if (!isAuthenticated) {
+                setAuthModalOpen(true);
+              } else {
+                navigate('list-property');
+              }
+            }}
+            className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold bg-secondary-container text-on-secondary-container hover:bg-secondary-container/85 border border-secondary-container/60 shadow-xs hover:shadow-sm active:scale-95 transition-all whitespace-nowrap cursor-pointer"
+            title="List Your Property"
+          >
+            <span className="material-symbols-outlined text-[16px] sm:text-[17px]">add_circle</span>
+            <span>List</span>
+          </button>
+
           {/* Notifications */}
           <button
             onClick={() => navigate('notifications')}
-            className="relative w-9 h-9 rounded-xl hover:bg-surface-container text-on-surface border border-transparent hover:border-outline-variant/30 flex items-center justify-center transition-colors cursor-pointer"
+            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl hover:bg-surface-container text-on-surface border border-transparent hover:border-outline-variant/30 flex items-center justify-center transition-colors cursor-pointer"
             title="Notifications"
           >
-            <span className="material-symbols-outlined text-[21px]">notifications</span>
+            <span className="material-symbols-outlined text-[19px] sm:text-[21px]">notifications</span>
             {unreadNotificationsCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 rounded-full bg-error text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-surface animate-pulse">
+              <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-error text-white text-[9.5px] font-bold flex items-center justify-center ring-2 ring-surface animate-pulse">
                 {unreadNotificationsCount}
               </span>
             )}
           </button>
 
-          {/* Saved properties & roommates */}
+          {/* Saved properties & roommates - hidden on small mobile, accessible in profile */}
           <button
             onClick={() => navigate('saved')}
-            className={`w-9 h-9 rounded-xl transition-colors flex items-center justify-center cursor-pointer border ${
+            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl transition-colors hidden sm:flex items-center justify-center cursor-pointer border ${
               currentRoute === 'saved'
                 ? 'bg-primary-container/15 text-primary border-primary-container/30 shadow-2xs'
                 : 'hover:bg-surface-container text-on-surface border-transparent hover:border-outline-variant/30'
             }`}
             title="Saved Items"
           >
-            <span className="material-symbols-outlined text-[21px]">bookmark</span>
+            <span className="material-symbols-outlined text-[19px] sm:text-[21px]">bookmark</span>
           </button>
 
           {/* Profile Capsule or Sign In Button */}
           {!isAuthenticated ? (
             <button
               onClick={() => setAuthModalOpen(true)}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-primary-container text-white text-xs font-bold shadow-xs hover:bg-primary active:scale-95 transition-all whitespace-nowrap cursor-pointer ml-0.5"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-primary-container text-white text-xs font-bold shadow-xs hover:bg-primary active:scale-95 transition-all whitespace-nowrap cursor-pointer ml-0.5"
             >
-              <span className="material-symbols-outlined text-[17px]">login</span>
+              <span className="material-symbols-outlined text-[16px] sm:text-[17px]">login</span>
               <span>Sign In</span>
             </button>
           ) : (
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors border border-outline-variant/40 cursor-pointer ml-0.5 select-none shadow-2xs"
+                className="flex items-center gap-1.5 sm:gap-2 pl-1 sm:pl-1.5 pr-2 sm:pr-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors border border-outline-variant/40 cursor-pointer ml-0.5 select-none shadow-2xs"
               >
-                <div className="w-7 h-7 rounded-full bg-primary-container text-white flex items-center justify-center text-xs font-bold shadow-xs">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-primary-container text-white flex items-center justify-center text-xs font-bold shadow-xs">
                   {currentUser?.name ? currentUser.name[0].toUpperCase() : 'U'}
                 </div>
-                <span className="text-xs font-bold text-on-surface hidden sm:inline max-w-[100px] truncate">
+                <span className="text-xs font-bold text-on-surface hidden md:inline max-w-[90px] truncate">
                   {currentUser?.name || 'Account'}
                 </span>
                 <span className={`material-symbols-outlined text-sm text-outline transition-transform duration-200 ${isUserMenuOpen ? 'rotate-180' : ''}`}>

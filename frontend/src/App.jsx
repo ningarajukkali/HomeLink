@@ -42,7 +42,7 @@ function ViewLoadingFallback() {
 }
 
 export default function App() {
-  const { currentRoute, isAuthenticated, isOwner } = useApp();
+  const { currentRoute, isAuthenticated, isOwner, setAuthModalOpen } = useApp();
 
   // Scroll to top on every view navigation
   useEffect(() => {
@@ -72,6 +72,10 @@ export default function App() {
       case 'compare':
         return <CompareView />;
       case 'list-property':
+        if (!isAuthenticated) {
+          setAuthModalOpen(true);
+          return <WelcomeView />;
+        }
         return <ListPropertyWizardView />;
       case 'featured-plans':
         return <FeaturedListingView />;
@@ -104,8 +108,8 @@ export default function App() {
       {/* Persistent Sticky Header */}
       <Header />
 
-      {/* Main Content View with Code-Splitting Suspense */}
-      <main className="flex-1 w-full">
+      {/* Main Content View with Code-Splitting Suspense & Mobile Bottom Spacing */}
+      <main className="flex-1 w-full pb-16 md:pb-0">
         <Suspense fallback={<ViewLoadingFallback />}>
           {renderCurrentView()}
         </Suspense>

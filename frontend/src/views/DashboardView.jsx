@@ -13,7 +13,9 @@ export default function DashboardView() {
     roommates,
     navigate,
     rentalFilters,
-    setRentalFilters
+    setRentalFilters,
+    isAuthenticated,
+    setAuthModalOpen
   } = useApp();
 
   const featuredProperties = properties
@@ -141,7 +143,13 @@ export default function DashboardView() {
         </button>
 
         <button
-          onClick={() => navigate('list-property')}
+          onClick={() => {
+            if (!isAuthenticated) {
+              setAuthModalOpen(true);
+            } else {
+              navigate('list-property');
+            }
+          }}
           className="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/40 hover:border-primary transition-all shadow-sm hover:shadow-md text-left cursor-pointer group"
         >
           <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition-all">

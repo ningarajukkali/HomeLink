@@ -10,7 +10,9 @@ export default function ListPropertyWizardView() {
     setListingDraft,
     addPropertyFromDraft,
     navigate,
-    goBack
+    goBack,
+    isAuthenticated,
+    setAuthModalOpen
   } = useApp();
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -206,6 +208,40 @@ const optimizeImageForInspection = (dataUrl, maxDimension = 1200) => {
       navigate('owner-dashboard');
     }, 1000);
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-16 text-center space-y-5 animate-in fade-in duration-200">
+        <div className="w-16 h-16 rounded-3xl bg-primary/10 text-primary flex items-center justify-center mx-auto shadow-sm">
+          <span className="material-symbols-outlined text-4xl">add_home</span>
+        </div>
+        <div className="space-y-2">
+          <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 text-xs font-extrabold uppercase tracking-wide">
+            100% Free Listing • Zero Brokerage
+          </span>
+          <h2 className="text-2xl font-black text-on-surface">Sign In to List Your Property</h2>
+          <p className="text-xs text-outline leading-relaxed max-w-sm mx-auto">
+            To ensure genuine listings and prevent spam in Rewa, please sign in with your mobile number or email before creating your listing.
+          </p>
+        </div>
+        <div className="pt-2 flex flex-col gap-2.5">
+          <button
+            onClick={() => setAuthModalOpen(true)}
+            className="w-full py-3.5 px-4 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span className="material-symbols-outlined text-lg">login</span>
+            <span>Sign In / Register</span>
+          </button>
+          <button
+            onClick={() => navigate('welcome')}
+            className="w-full py-2.5 px-4 rounded-xl text-outline hover:text-on-surface hover:bg-surface-container font-semibold text-xs transition-colors cursor-pointer"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 space-y-6 pb-28">
